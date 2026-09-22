@@ -12,6 +12,12 @@ node server.js
 
 Open `http://localhost:8000`.
 
+## Deployment
+
+The repository includes a GitHub Pages deployment workflow. In GitHub, open **Settings → Pages** and select **GitHub Actions** as the deployment source. Every push to `main` then deploys the site to:
+
+`https://harshitaggarwal22.github.io/Stock/`
+
 ## Model details
 
 - Feature engineering: latest close, 5/14-day SMA, RSI(14), 5-day momentum and realized volatility
