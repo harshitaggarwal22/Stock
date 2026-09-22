@@ -18,6 +18,17 @@ The repository includes a GitHub Pages deployment workflow. In GitHub, open **Se
 
 `https://harshitaggarwal22.github.io/Stock/`
 
+### Vercel
+
+This is a static HTML/CSS/JavaScript app—there is no build command and no environment variable required.
+
+1. In Vercel, select **Add New → Project** and import `harshitaggarwal22/Stock`.
+2. Set the framework preset to **Other**.
+3. Leave **Build Command** and **Output Directory** empty.
+4. Click **Deploy**.
+
+The included `vercel.json` serves `index.html` as the home page and preserves all linked `.html` pages (`lab.html`, `data.html`, and `project.html`).
+
 ## Model details
 
 - Feature engineering: latest close, 5/14-day SMA, RSI(14), 5-day momentum and realized volatility
