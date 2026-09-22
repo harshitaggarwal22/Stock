@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Model Lab — Market Muse</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<main class="shell">
+  <header class="topbar"><a class="brand" href="index.html"><span class="brand-mark"><i></i><i></i><i></i></span><span>market <em>muse</em></span></a><nav class="site-nav"><a href="index.html">Forecast</a><a class="active" href="lab.html">Model lab</a><a href="data.html">Data studio</a><a href="project.html">Case study</a></nav><span class="page-tag">EXPERIMENT 02</span></header>
+  <section class="page-hero"><p class="eyebrow">MODEL RESEARCH WORKSPACE</p><h1>Compare the fit.<br /><em>Keep the story honest.</em></h1><p>Benchmark a regularized linear model against simple market baselines. The best score is not automatically the best explanation.</p></section>
+  <section class="experiment-toolbar">
+    <div><span class="toolbar-label">TARGET</span><strong>Next-session close</strong></div>
+    <div><span class="toolbar-label">SPLIT</span><strong>Walk-forward · 80 / 20</strong></div>
+    <div><span class="toolbar-label">SYMBOL</span><select id="labSymbol"><option>AAPL · Apple</option><option>NVDA · NVIDIA</option><option>MSFT · Microsoft</option></select></div>
+    <button id="rerunLab">Re-run experiment <span>↻</span></button>
+  </section>
+  <section class="lab-layout">
+    <article class="lab-lead card"><div class="card-head"><div><p class="eyebrow">CHAMPION MODEL</p><h2>Ridge regression</h2></div><span class="champion-badge">selected</span></div><p class="lead-copy">A stable, explainable forecast with the strongest balance of error control and interpretability.</p><div class="big-score"><span>VALIDATION RMSE</span><strong id="labRmse">$3.42</strong><small id="labDelta">−18.6% vs naive</small></div><div class="coefficient-sketch" id="coefficientSketch"></div></article>
+    <article class="card comparison-card"><div class="card-head"><div><p class="eyebrow">BENCHMARK TABLE</p><h2>Validation leaderboard</h2></div><span class="mono-note">LOWER IS BETTER</span></div><div class="model-table"><div class="table-head"><span>Model</span><span>RMSE</span><span>MAE</span><span>R²</span></div><div class="model-row best"><span><i></i>Ridge regression <b>CHAMPION</b></span><strong id="ridgeRMSE">3.42</strong><strong id="ridgeMAE">2.61</strong><strong id="ridgeR2">0.82</strong></div><div class="model-row"><span><i></i>Linear regression</span><strong id="linearRMSE">3.69</strong><strong id="linearMAE">2.87</strong><strong id="linearR2">0.79</strong></div><div class="model-row"><span><i></i>7-day moving average</span><strong id="movingRMSE">4.21</strong><strong id="movingMAE">3.34</strong><strong id="movingR2">0.72</strong></div><div class="model-row"><span><i></i>Naive persistence</span><strong id="naiveRMSE">4.20</strong><strong id="naiveMAE">3.42</strong><strong id="naiveR2">0.71</strong></div></div><p class="table-note">Metrics are calculated only on data unseen during training.</p></article>
+  </section>
+  <section class="insight-grid"><article class="insight-card"><span>01</span><h3>Why regularize?</h3><p>Ridge shrinkage reduces the chance that correlated features, such as price and moving averages, dominate each other.</p></article><article class="insight-card"><span>02</span><h3>Why validate?</h3><p>A temporal holdout prevents future data from leaking backwards into the training process.</p></article><article class="insight-card"><span>03</span><h3>Why explain?</h3><p>Feature contribution is visible, making it suitable for an academic model review and portfolio walkthrough.</p></article></section>
+</main><script src="lab.js"></script>
+</body></html>

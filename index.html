@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f5f2eb" />
+    <title>Market Muse — Stock Forecast Lab</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <a class="brand" href="#top" aria-label="Market Muse home">
+          <span class="brand-mark"><i></i><i></i><i></i></span>
+          <span>market <em>muse</em></span>
+        </a>
+        <nav class="site-nav" aria-label="Primary navigation">
+          <a class="active" href="index.html">Forecast</a>
+          <a href="lab.html">Model lab</a>
+          <a href="data.html">Data studio</a>
+          <a href="project.html">Case study</a>
+        </nav>
+        <button class="icon-button" id="aboutBtn" aria-label="About this project">?</button>
+      </header>
+
+      <section class="intro" id="top">
+        <div>
+          <p class="eyebrow">AIML PROJECT / REGRESSION WORKBENCH</p>
+          <h1>Read the trend.<br /><em>Model the next move.</em></h1>
+          <p class="lede">An interpretable stock-price forecasting workspace built around feature engineering, ridge regression and honest out-of-sample evaluation.</p>
+        </div>
+        <div class="intro-rule"></div>
+        <div class="method-stamp">
+          <span>METHOD</span>
+          <strong>Ridge<br />regression</strong>
+          <small>with rolling features</small>
+        </div>
+      </section>
+
+      <section class="control-panel" aria-label="Forecast controls">
+        <div class="control stock-control">
+          <label for="stockSelect">Instrument</label>
+          <select id="stockSelect">
+            <option value="AAPL">AAPL · Apple Inc.</option>
+            <option value="MSFT">MSFT · Microsoft Corp.</option>
+            <option value="NVDA">NVDA · NVIDIA Corp.</option>
+            <option value="TSLA">TSLA · Tesla Inc.</option>
+            <option value="RELIANCE">RELIANCE · Reliance Industries</option>
+          </select>
+        </div>
+        <div class="control">
+          <label for="horizonSelect">Forecast horizon</label>
+          <select id="horizonSelect">
+            <option value="7">7 market days</option>
+            <option value="14" selected>14 market days</option>
+            <option value="30">30 market days</option>
+          </select>
+        </div>
+        <div class="control">
+          <label for="regularization">Regularization λ <output id="lambdaOutput">0.18</output></label>
+          <input id="regularization" type="range" min="0.02" max="0.6" value="0.18" step="0.02" />
+        </div>
+        <button class="run-button" id="runModelBtn"><span>Run model</span><b>↗</b></button>
+      </section>
+
+      <section class="dashboard-grid">
+        <article class="card chart-card">
+          <div class="card-head">
+            <div>
+              <p class="eyebrow" id="tickerLabel">AAPL / NASDAQ</p>
+              <h2>Price & projection</h2>
+            </div>
+            <div class="legend"><span><i class="history-key"></i>Close</span><span><i class="forecast-key"></i>Forecast</span></div>
+          </div>
+          <div class="quote-row">
+            <strong id="latestPrice">$184.21</strong><span id="priceChange" class="positive">+1.72% today</span>
+            <span class="quote-caption" id="lastDate">Last observation · Jun 21, 2024</span>
+          </div>
+          <div id="priceChart" class="chart" aria-label="Historical closing price and forecast chart"></div>
+          <div class="chart-footer"><span>Trailing 70 sessions</span><span id="forecastLabel">14-session projection</span></div>
+        </article>
+
+        <article class="card signal-card">
+          <div class="card-head compact"><div><p class="eyebrow">MODEL SIGNAL</p><h2 id="signalTitle">Cautiously bullish</h2></div><span class="signal-dot"></span></div>
+          <p class="signal-copy" id="signalCopy">The projected trend holds above its 14-day average, though the confidence band widens with time.</p>
+          <div class="projection">
+            <span>DAY <b id="horizonNumber">14</b></span>
+            <strong id="projectedPrice">$188.74</strong>
+            <small id="projectedChange">+2.46% from last close</small>
+          </div>
+          <div class="confidence-head"><span>Confidence interval</span><strong id="confidenceText">± $4.08</strong></div>
+          <div class="confidence-bar"><span id="confidenceFill"></span></div>
+          <p class="fineprint">Projection is a statistical estimate, not investment advice.</p>
+        </article>
+
+        <article class="card metrics-card">
+          <div class="card-head"><div><p class="eyebrow">OUT-OF-SAMPLE CHECK</p><h2>Validation</h2></div><span class="badge">holdout 20%</span></div>
+          <div class="metric-grid">
+            <div><span>RMSE</span><strong id="rmse">$3.42</strong><small>lower is better</small></div>
+            <div><span>MAE</span><strong id="mae">$2.61</strong><small>mean absolute error</small></div>
+            <div><span>R² score</span><strong id="r2">0.82</strong><small>explained variance</small></div>
+          </div>
+          <div class="validation-line"><span id="validationNote">64 validation sessions analysed</span><span>↗</span></div>
+        </article>
+
+        <article class="card feature-card">
+          <div class="card-head"><div><p class="eyebrow">FEATURE INTELLIGENCE</p><h2>What informs the model</h2></div></div>
+          <div class="feature-list" id="featureList"></div>
+        </article>
+
+        <article class="card workflow-card">
+          <div>
+            <p class="eyebrow">BRING YOUR OWN DATA</p>
+            <h2>Use a CSV export</h2>
+            <p>Upload a file with <code>Date</code> and <code>Close</code> columns to model your own historical series locally.</p>
+          </div>
+          <label class="upload-button" for="csvUpload">Upload CSV <span>+</span></label>
+          <input id="csvUpload" type="file" accept=".csv,text/csv" hidden />
+        </article>
+      </section>
+
+      <section class="process-section">
+        <div><p class="eyebrow">UNDER THE HOOD</p><h2>From a price series to a transparent forecast.</h2></div>
+        <ol class="process-list">
+          <li><span>01</span><strong>Prepare</strong><p>Clean close prices and reserve the final 20% for validation.</p></li>
+          <li><span>02</span><strong>Engineer</strong><p>Derive SMA, RSI, momentum and realized volatility signals.</p></li>
+          <li><span>03</span><strong>Fit</strong><p>Standardize predictors and train regularized linear regression.</p></li>
+          <li><span>04</span><strong>Forecast</strong><p>Roll features forward with a widening uncertainty interval.</p></li>
+        </ol>
+      </section>
+
+      <section class="resume-strip">
+        <div><p class="eyebrow">PORTFOLIO-READY BUILD</p><h2>Designed to be discussed,<br />not just demonstrated.</h2></div>
+        <p>Navigate the model lab for benchmark comparison, the data studio for dataset health checks, and the case study for the full ML methodology.</p>
+        <a href="project.html">Read the case study <span>↗</span></a>
+      </section>
+    </main>
+
+    <dialog id="aboutDialog">
+      <button id="closeDialog" aria-label="Close">×</button>
+      <p class="eyebrow">PROJECT NOTE</p><h2>Market Muse</h2>
+      <p>This browser-based demo trains an interpretable ridge-regression model directly on the selected series. Built for learning: results change with the data, horizon and regularization setting.</p>
+      <p>Included ticker data is generated as a reproducible classroom dataset. Upload a CSV for a real historical series.</p>
+    </dialog>
+    <script src="app.js"></script>
+  </body>
+</html>
